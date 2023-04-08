@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Register Asset</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="register_processing.jsp">
+            Asset Name: <input type="text" id="asset_name" name="asset_name" required> <br>
+            Asset Description: <input type="text" id="asset_description" name="asset_description" required> <br>
+            Acquisition Date(Year-Month-Day, Ex. 2003-02-10): <input type="text" id="acquisition_date" name="acquisition_date" required> <br>
+            For renting or not (1 or 0): <input type="number" id="forrent" name="forrent" required> <br>
+            Asset Value: <input type="number" step="0.01" id="asset_value" name="asset_value" required> <br>
+            Type of Asset (P-Property, E-Equipment, F-Furniture and Fixtures, or O-Other Assets): <input type="text" id="type_asset" name="type_asset" required> <br>
+            Status of Asset (W-Working Condition, D-Deteriorated, P-For Repair, S-For Disposal, or X-Disposed): <input type="text" id="status" name="status" required> <br>
+            Latitude Location of Asset: <input type="number" step="0.0001" id="loc_lattitude" name="loc_lattitude" required> <br>
+            Longitude Location of Asset: <input type="number" step="0.0001" id="loc_longiture" name="loc_longiture" required> <br>
+            HOA Name (SJH or SMH): <input type="text" id="hoa_name" name="hoa_name" required> <br>
+            Enclosing Asset (Optional): <input type="text" id="enclosing_asset" name="enclosing_asset"> <br>
+            <input type="submit" value="Submit">
+            
+        </form>
+    </body>
+</html>
