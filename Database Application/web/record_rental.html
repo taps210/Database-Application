@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Record Rental</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <form action="register_processing.jsp">
+            Asset Rental ID: <input type="number" id="asset_rentalid" name="asset_name" required> <br>
+            Reservation Date(Year-Month-Day, Ex. 2003-02-10): <input type="text" id="reservation_date" name="reservation_date" required> <br>
+            Rental Date(Year-Month-Day, Ex. 2003-02-10): <input type="text" id="rental_date" name="rental_date" required> <br>
+            Discount: <input type="number" id="discount" name="discount" required> <br>
+            Status (RV - Reserved, C - Cancelled, OR - On Rent, or R - Returned): <input type="text" id="status" name="status" required> <br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
