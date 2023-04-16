@@ -21,22 +21,20 @@
         <jsp:useBean id="A_R" class="asset_mgt.asset_rental" scope="session" />
             <% 
                 A_R.asset_id = Integer.parseInt(request.getParameter("asset_id"));
-                A_R.resident_id = Integer.parseInt(request.getParameter("resident_id"));
-                A_R.reservation_date = request.getParameter("reservation_date");
-                A_R.rental_date = request.getParameter("rental_date");
-                A_R.discount = Float.parseFloat(request.getParameter("discount"));
-    
+                A_R.inspection_details = request.getParameter("inspection_details");
+                A_R.assessed_value = Float.parseFloat(request.getParameter("assessed_value"));
+
                 
-                int status = A_R.recordRental();
+                int status = A_R.returnRental();
             
                 if (status == 1) {
             %>
-                <h1>Recording Rental Successful</h1>
+                <h1>Returning of Rental Successful</h1>
             <%
                 }
                 else {
             %>
-                    <h1>Record Rental Failed</h1>
+                    <h1>Returning of Rental Failed</h1>
             <% 
                 }
             %>

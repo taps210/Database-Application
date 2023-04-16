@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Dispose Asset</title>
+        <title> Dispose Asset</title>
     </head>
     <body>
         <form action="dispose_processing.jsp">

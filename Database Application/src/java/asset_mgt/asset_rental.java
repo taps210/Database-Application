@@ -38,36 +38,49 @@ public class asset_rental {
             Connection conn; jdbc:mysql://localhost:3306/test
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/HOADB?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
             System.out.println("Connection Successful");
+            conn.setAutoCommit(false);
             
             PreparedStatement pstmt = conn.prepareStatement("SELECT asset_id,resident_id FROM asset_rentals");
             ResultSet rst = pstmt.executeQuery();
 
-            while (rst.next()) {
-                residentIdList.add(rst.getInt("resident_id"));
-            }
-          
-           
 
+          
+            pstmt = conn.prepareStatement("INSERT INTO asset_transactions VALUE(?,?,?,?,?,?,null,null,null,null,?)");
+            // INSERT SETTERS HERE AND EXECUTE UPDATE
+            pstmt.setInt(1, asset_id);
+            pstmt.setString(2, rental_date);
+            pstmt.setInt(3, 9011);
+            pstmt.setString(4, "Auditor");
+            pstmt.setString(5, "2022-12-01");
+            pstmt.setInt(6, 0);
+            pstmt.setString(7, "R");
+            pstmt.executeUpdate();
             
-            pstmt = conn.prepareStatement("INSERT INTO asset_rentals VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+
+            pstmt = conn.prepareStatement("INSERT INTO asset_rentals VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, null, null, null, ?)");
             pstmt.setInt(1, asset_id);
             pstmt.setString(2, rental_date);
             pstmt.setString(3, reservation_date);
             pstmt.setInt(4, resident_id);
-            pstmt.setFloat(5, rental_amount);
+            pstmt.setFloat(5, 50);
             pstmt.setFloat(6, discount);
+            
+            if(rental_date.equals(reservation_date)) {
+                status = "O";
+            }
             pstmt.setString(7, status);
-            pstmt.setString(8, inspection_details);
-            pstmt.setFloat(9, assessed_value);
-            pstmt.setInt(10, accept_hoid);
-            pstmt.setString(11, accept_position);
-            pstmt.setString(12, accept_electiondate);
-            pstmt.setString(13, return_date);
+            pstmt.setString(8, "Mukhang Ok naman");
+            pstmt.setFloat(9, 500);
+            pstmt.setString(10, return_date);
             pstmt.executeUpdate();
+            
+            conn.commit();
 
 
             pstmt.close();
             conn.close();
+
             
             return 1;
         } catch (Exception e) {
@@ -76,21 +89,47 @@ public class asset_rental {
         }
     }
 
-    public int returnRental() {
+        public int returnRental() {
         try {
             Connection conn; jdbc:mysql://localhost:3306/test
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/HOADB?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
             System.out.println("Connection Successful");
+            conn.setAutoCommit(false);
 
-            PreparedStatement pstmt = conn.prepareStatement("");
+
+            PreparedStatement pstmt = conn.prepareStatement("SELECT * FROM asset_rentals WHERE status = 'R' OR status = 'O'");
             ResultSet rst = pstmt.executeQuery();
-
-
-            while (rst.next()) {
-
+/*
+            while(rst.next()){
+                if (inspection_details == "")
+                    inspection_details = rst.getString(inspection_details);
+                if (assessed_value == "")
+                    assessed_value = rst.getString(assessed_value);
+                if (accept_hoid == "")
+                    accept_hoid = rst.getString(accept_hoid);
+                if (accept_position == "")
+                    accept_position = rst.getString(accept_position);
+                if (accept_electiondate == "")
+                    accept_electiondate = rst.getString(accept_electiondate);
+                if (return_date == "")
+                    return_date = rst.getString(return_date);
             }
+*/          
+            
+            pstmt = conn.prepareStatement("UPDATE asset_rentals SET status = ?, inspection_details = ?, assessed_value = ?, accept_hoid = ?, accept_position = ?, accept_electiondate = ?, return_date = ? WHERE asset_id = ?");
+            pstmt.setString(1, "N");
+            pstmt.setString(2, inspection_details);
+            pstmt.setFloat(3, assessed_value);
+            pstmt.setInt(4, 9004);
+            pstmt.setString(5, "President");
+            pstmt.setString(6, "2022-12-01");
+            pstmt.setString(7, return_date);
+            pstmt.setInt(8, asset_id);
 
-            pstmt = conn.prepareStatement("");
+
+            pstmt.executeUpdate();
+
+            conn.commit();
 
             pstmt.close();
             conn.close();
@@ -101,6 +140,7 @@ public class asset_rental {
             return 0;
         }
     }
+
 
     public int updateRental() {
 
