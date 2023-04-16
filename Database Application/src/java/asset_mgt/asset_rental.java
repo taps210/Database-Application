@@ -15,6 +15,14 @@ import java.sql.*;
 
 public class asset_rental {
     public int asset_rentalid;
+    public int renter_residentid;
+    public String reservation_date;
+    public String rental_date;
+    public float discount;
+    public String status;
+    public String return_details;
+    // will not include hoa_officer since generated siya sa jsp
+    
     public ArrayList<Integer> rentalidList = new ArrayList<>();
 
     public int recordRental() {
@@ -28,10 +36,18 @@ public class asset_rental {
            
             
             while (rst.next()) {
-                rentalidList.add(asset_rentalid)
-                // asset_rentalid = rst.getInt("newID");
+               asset_rentalid = rst.getInt("newID");
             }
             
+            pstmt = conn.prepareStatement("INSERT INTO asset_rental VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            pstmt.setInt(1, asset_rentalid);
+            pstmt.setInt(2, renter_residentid);
+            pstmt.setString(3, reservation_date);
+            pstmt.setString(4, rental_date);
+            pstmt.setFloat(5, discount);
+            pstmt.setString(6, status);
+            pstmt.setString(7, return_details);
+
             pstmt.close();
             conn.close();
             
@@ -44,11 +60,6 @@ public class asset_rental {
     
     public static void main (String args[]) {
         asset_rental A = new asset_rental();
-        A.recordRental();
-        for(int i = 0; i<A.rentalidList.size(); i++){
-            System.out.println(A.rentalidList(i)));
-        }
     }
-    
     
 }
