@@ -20,7 +20,8 @@
     <body>
         <jsp:useBean id="A_R" class="asset_mgt.asset_rental" scope="session" />
             <% 
-                A_R.renter_residentid = Integer.parseInt(request.getParameter("renter_residentid"));
+                A_R.asset_id = Integer.parseInt(request.getParameter("asset_id"));
+                A_R.resident_id = Integer.parseInt(request.getParameter("resident_id"));
                 A_R.reservation_date = request.getParameter("reservation_date");
                 A_R.rental_date = request.getParameter("rental_date");
                 A_R.discount = Float.parseFloat(request.getParameter("discount"));
