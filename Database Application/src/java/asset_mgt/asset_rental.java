@@ -19,7 +19,7 @@ public class asset_rental {
     public String reservation_date;
     public String rental_date;
     public float discount;
-    public String status;
+    public String status = "OR";
     public String return_details;
     // will not include hoa_officer since generated siya sa jsp
     
@@ -28,7 +28,7 @@ public class asset_rental {
     public int recordRental() {
         try {
             Connection conn; jdbc:mysql://localhost:3306/test
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/HOADB?useTimezone=true&serverTimezone=UTC&user=root&password=12345678");
             System.out.println("Connection Successful");
             
             PreparedStatement pstmt = conn.prepareStatement("SELECT MAX(asset_rentalid) + 1 AS newID FROM asset_rental");
@@ -39,14 +39,15 @@ public class asset_rental {
                asset_rentalid = rst.getInt("newID");
             }
             
-            pstmt = conn.prepareStatement("INSERT INTO asset_rental VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            pstmt = conn.prepareStatement("INSERT INTO asset_rental VALUE(?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setInt(1, asset_rentalid);
             pstmt.setInt(2, renter_residentid);
             pstmt.setString(3, reservation_date);
             pstmt.setString(4, rental_date);
             pstmt.setFloat(5, discount);
             pstmt.setString(6, status);
-            pstmt.setString(7, return_details);
+            pstmt.setInt(7,1002);
+            pstmt.setInt(8,1000005);
 
             pstmt.close();
             conn.close();
@@ -59,7 +60,10 @@ public class asset_rental {
     }
     
     public static void main (String args[]) {
-        asset_rental A = new asset_rental();
+        asset_rental A_R = new asset_rental();
+        A_R.recordRental();
+        
+        System.out.println(A_R.asset_rentalid);
     }
     
 }
